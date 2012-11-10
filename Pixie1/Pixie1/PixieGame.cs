@@ -35,7 +35,7 @@ namespace Pixie1
         {
             instance = this;
             graphics = new GraphicsDeviceManager(this);
-            graphics.IsFullScreen = true;
+            graphics.IsFullScreen = false;
             graphics.PreferredBackBufferHeight = myWindowHeight;
             graphics.PreferredBackBufferWidth = myWindowWidth;
             Content.RootDirectory = "Content";
@@ -72,9 +72,7 @@ namespace Pixie1
 
         protected override void LoadContent()
         {
-            //mainScreenlet.Add(new FrameRateCounter(1.0f, 0f)); // TODO
-            level = new QuestLevel();
-
+            level = new PixelStormLevel();
             mainScreenlet.Add(level);
 
             base.LoadContent();

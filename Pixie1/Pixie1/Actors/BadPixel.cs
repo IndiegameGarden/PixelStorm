@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using TTengine.Core;
 using TTengine.Util;
 using Microsoft.Xna.Framework;
@@ -15,43 +16,47 @@ namespace Pixie1.Actors
         public AlwaysTurnRightBehavior Turning;
         public RandomWanderBehavior Wandering;
 
-        public static BadPixel Create()
-        {
-            return new BadPixel(Level.Current.pixie);
-        }
+        Vector2 vecLeft = new Vector2(-1f, 0f);
 
-        public static BadPixel CreateCloaky()
+        public static BadPixel Create(int tp)
         {
-            BadPixel p = new BadPixel(Level.Current.pixie);
-            p.IsCloaky = true;
-            return p;
+            string tpString;
+            switch (tp)
+            {
+                case 0:
+                    tpString = "pixie";
+                    break;
+                case 1:
+                    tpString = "shape2x2";
+                    break;
+                default:
+                    tpString = "shape2x2";
+                    break;
+            }
+            return new BadPixel(tpString);
         }
 
         bool isCloaky = false;
 
-        public BadPixel(Thing chaseTarget)
-            : base("shape2x2")
+        public BadPixel(string shape)
+            : base(shape)
         {
             IsCollisionFree = false;
             DrawInfo.DrawColor = new Color(255, 10, 4);
 
+            /*
             SubsumptionBehavior sub = new SubsumptionBehavior();
             Add(sub);
+            */
 
-            Chasing = new ChaseBehavior(chaseTarget);
-            Chasing.MoveSpeed = RandomMath.RandomBetween(0.47f, 0.75f);
-            Chasing.ChaseRange = 6f; // RandomMath.RandomBetween(12f, 40f);
-            sub.Add(Chasing);
-
-            Turning = new AlwaysTurnRightBehavior();
-            Turning.MoveSpeed = Chasing.MoveSpeed; //RandomMath.RandomBetween(0.57f, 1.05f);
-            Turning.MoveSpeed = 0.7f;
-            sub.Add(Turning);
-
+            /*
             Wandering = new RandomWanderBehavior(2.7f, 11.3f);
             Wandering.MoveSpeed = 0.7f;
             sub.Add(Wandering);
-            
+            */
+
+            LinearMotionBehavior b = new LinearMotionBehavior(new Vector2(-1f, 0f));
+            Add(b);
         }
 
         /// <summary>
@@ -76,16 +81,24 @@ namespace Pixie1.Actors
         {
             base.OnUpdate(ref p);
 
-            if (TargetMove.LengthSquared() > 0)
+            // check attach
+            List<Thing> l = DetectCollisions(vecLeft);
+            if (l.Count > 0)
             {
-                if (CollidesWhenThisMoves(Level.Current.pixie, TargetMove))
-                {
-                    if (Level.Current.Subtitles.Children.Count <= 2)
-                    {
-                        Level.Current.Subtitles.Show(3, "HALT! Thou shalt\n   not pass.", 3.5f);
-                    }
-                }
+                Thing t = l[0];
+                t.AddNextUpdate(this); // become a child - attach to it.
+                this.AttachmentPosition = (this.Target - t.Target); // new relative position
             }
+
+            // check self-delete
+            Vector2 pp = Level.Current.pixie.Target;
+            if (Target.X < pp.X - 80f)
+                Delete = true;
+            if (CollidesWithBackground(Vector2.Zero) && SimTime < 0.2f)
+            {
+                Delete = true;
+            }
+
         }
     }
 }

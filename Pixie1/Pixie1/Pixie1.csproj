@@ -114,7 +114,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Actors\BombMissile.cs" />
-    <Compile Include="Levels\AmazingLevel.cs" />
+    <Compile Include="Behaviors\LinearMotionBehavior.cs" />
     <Compile Include="Actors\BadPixel.cs" />
     <Compile Include="Behaviors\AlwaysTurnRightBehavior.cs" />
     <Compile Include="Behaviors\RandomWanderBehavior.cs" />
@@ -123,7 +123,7 @@
     <Compile Include="Behaviors\ChaseBehavior.cs" />
     <Compile Include="Behaviors\ColorCycleBehavior.cs" />
     <Compile Include="Behaviors\SubsumptionBehavior.cs" />
-    <Compile Include="Levels\QuestLevel.cs" />
+    <Compile Include="Levels\PixelStormLevel.cs" />
     <Compile Include="RotatingBackground.cs" />
     <Compile Include="FinalScreen.cs" />
     <Compile Include="GameMusic.cs" />
@@ -156,7 +156,6 @@
     <Compile Include="Toys\ShowMessageToy.cs" />
     <Compile Include="Toys\SpeedModifyToy.cs" />
     <Compile Include="Toys\ZoomOutToy.cs" />
-    <Compile Include="Levels\TrainwrecksLevel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />

@@ -104,6 +104,7 @@ namespace Pixie1
                 Target = value;
                 TTutil.Round(ref Position);
                 TTutil.Round(ref Target);
+                //Motion.Position
             }
         }
 
@@ -167,7 +168,7 @@ namespace Pixie1
         {
             base.OnNewParent();
             bg = Level.Current.Background;
-            if(!IsCollisionFree)
+            if(!IsCollisionFree && !allThingsList.Contains(this))
                 allThingsList.Add(this);
         }
 
