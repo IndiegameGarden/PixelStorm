@@ -28,6 +28,7 @@ namespace Pixie1
         public Color ForegroundColor = Color.White;
 
         SpriteBatch spriteBatch;
+        static Vector2 PIXEL_OFFSET = new Vector2(0f, 9f);
 
         public LevelBackground(string bitmapFileName)
             : base(bitmapFileName)
@@ -73,7 +74,7 @@ namespace Pixie1
             {
                 spriteBatch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend, SamplerState.PointClamp, null, null);
 
-                spriteBatch.Draw(Texture, DrawInfo.DrawPosition, null, DrawInfo.DrawColor,
+                spriteBatch.Draw(Texture, DrawInfo.DrawPosition + PIXEL_OFFSET, null, DrawInfo.DrawColor,
                        Motion.RotateAbs, Vector2.Zero, DrawInfo.DrawScale, SpriteEffects.None, DrawInfo.LayerDepth);
 
                 spriteBatch.End();

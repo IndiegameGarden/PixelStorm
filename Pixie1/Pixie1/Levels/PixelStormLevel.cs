@@ -60,9 +60,8 @@ namespace Pixie1.Levels
         protected override void InitToys()
         {
             base.InitToys();
-            Vector2 p;
-            Toy t;
-
+            //Vector2 p;
+            //Toy t;
             //t = new ZoomOutToy(); p = new Vector2(70f,48f); t.PositionAndTarget = p; Add(t);
         }
 
@@ -72,27 +71,27 @@ namespace Pixie1.Levels
             Add(Music);
 
             SubtitleText t = new SubtitleText();
-            t.AddText("QUEST FOR THE\nPIXEL PRINCESS", 6f);
-            t.AddText("You, The Golden Knight, must\nrescue the princess...", 5f);
-            t.AddText("...from the clutches of\nthe evil Red Guard.", 5f);
-            //t.AddText("...from the clutches of\nthe evil Red Guard.", 5f);
+            t.AddText("Pixel, QUO VATRIS?", 6f);
+            t.StartTime = 3.751f;
             Subtitles.Show(0, t);
 
+            /*
             t = new SubtitleText("My ears! Hark the drums\nof the Red Guard!");
             t.StartTime = 64.0f;
             t.Duration = 10.0f;
             Subtitles.Show(0, t);
+            */
 
             t = new SubtitleText();
-            t.AddText("Music 'The Never Ending Quest For The\nPrincess II' by Producer Snafu!\nCC-BY-NC  producersnafu.bandcamp.com", 10f);
+            t.AddText("Music 'Layers' by Space Explorer(s)!\nCC-BY  SpaceExplorers.bandcamp.com", 10f);
             t.AddText("FMOD Audio engine\n(c) Firelight Technologies Pty, Ltd. 2004-2009.", 6f);
             //t.Duration = 10f;
             Parent.Add(t);
             t.ScaleVector = new Vector2(1f, 1f);
             t.Motion.Scale = 0.35f ;/// DEFAULT_SCALE;
-            t.Motion.Position = new Vector2(0.35f,0.25f);
+            t.Motion.Position = new Vector2(0.33f,0.18f);
             //t.DrawInfo.Center = Vector2.Zero;
-            t.StartTime = 17f;
+            t.StartTime = 15.317f;
         }
 
         protected override bool ScreenBorderHit()
@@ -151,7 +150,7 @@ namespace Pixie1.Levels
                 BadPixel b = BadPixel.Create( (int) Math.Round(RandomMath.RandomBetween(-0.49f,4.49f)));
                 float x = RandomMath.RandomBetween(40f,50f);
                 float y = RandomMath.RandomBetween(-20f,20f);
-                b.PositionAndTarget = pixie.Target + new Vector2(x,y);
+                b.PositionAndTarget = new Vector2(x + LevelBackground.ViewPos.X, y + pixie.Target.Y);
                 AddNextUpdate(b);
             }
 

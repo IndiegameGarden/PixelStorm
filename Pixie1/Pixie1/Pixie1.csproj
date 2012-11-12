@@ -131,7 +131,6 @@
     <Compile Include="PixieLogo.cs" />
     <Compile Include="SubtitleManager.cs" />
     <Compile Include="SubtitleText.cs" />
-    <Compile Include="TitleScreen.cs" />
     <Compile Include="Toy.cs" />
     <Compile Include="ThingControl.cs" />
     <Compile Include="PixieKeyControl.cs" />
