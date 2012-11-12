@@ -168,12 +168,12 @@ namespace Pixie1
             // scrolling background at borders
             Vector2 pixiePos = pixie.Motion.PositionAbs;
 
-            if (pixiePos.X < BOUND_X || pixiePos.X > (Screen.Width - BOUND_X) ||
-                pixiePos.Y < BOUND_Y || pixiePos.Y > (Screen.Height - BOUND_Y))
+            if (pixiePos.Y < BOUND_Y || pixiePos.Y > (Screen.Height - BOUND_Y))
             {
                 if (ScreenBorderHit())
-                    Background.Target = pixie.Position;
+                    Background.Target.Y = pixie.Position.Y;
             }
+             
         }
 
         /// <summary>

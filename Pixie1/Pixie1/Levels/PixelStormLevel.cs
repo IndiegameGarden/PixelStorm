@@ -148,13 +148,15 @@ namespace Pixie1.Levels
             {
                 timerNewBaddie = 0f;
                 nextBaddieInterval = RandomMath.RandomBetween(0.5f, MaxPauseBetweenBaddies);
-                BadPixel b = BadPixel.Create( (int) Math.Round(RandomMath.RandomBetween(-0.49f,1.49f)));
-                float x = RandomMath.RandomBetween(20f,22f);
-                float y = RandomMath.RandomBetween(-10f,10f);
+                BadPixel b = BadPixel.Create( (int) Math.Round(RandomMath.RandomBetween(-0.49f,4.49f)));
+                float x = RandomMath.RandomBetween(40f,50f);
+                float y = RandomMath.RandomBetween(-20f,20f);
                 b.PositionAndTarget = pixie.Target + new Vector2(x,y);
                 AddNextUpdate(b);
             }
 
+            // scroll background
+            Background.Target = BG_STARTING_POS + new Vector2(SimTime,0f);
         }
     }
 }

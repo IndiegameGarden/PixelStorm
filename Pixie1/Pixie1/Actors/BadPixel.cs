@@ -17,6 +17,8 @@ namespace Pixie1.Actors
         public RandomWanderBehavior Wandering;
 
         Vector2 vecLeft = new Vector2(-1f, 0f);
+        bool IsAttachedToPixie = false;
+        LinearMotionBehavior MyMotion;
 
         public static BadPixel Create(int tp)
         {
@@ -24,10 +26,19 @@ namespace Pixie1.Actors
             switch (tp)
             {
                 case 0:
-                    tpString = "pixie";
+                    tpString = "t-block";
                     break;
                 case 1:
-                    tpString = "shape2x2";
+                    tpString = "t-l";
+                    break;
+                case 2:
+                    tpString = "t-s";
+                    break;
+                case 3:
+                    tpString = "t-z";
+                    break;
+                case 4:
+                    tpString = "t-stick";
                     break;
                 default:
                     tpString = "shape2x2";
@@ -55,8 +66,8 @@ namespace Pixie1.Actors
             sub.Add(Wandering);
             */
 
-            LinearMotionBehavior b = new LinearMotionBehavior(new Vector2(-1f, 0f));
-            Add(b);
+            MyMotion = new LinearMotionBehavior(new Vector2(-1f, 0f));
+            Add(MyMotion);
         }
 
         /// <summary>
@@ -81,13 +92,39 @@ namespace Pixie1.Actors
         {
             base.OnUpdate(ref p);
 
-            // check attach
+            // hack - not visible at first to avoid position-flicker
+            if (SimTime < 0.3f)
+                Visible = false;
+            else
+                Visible = true;
+
+            // if attached, disable motion
+            MyMotion.Active = !(Parent is Pixie);
+
+            // check start of attachment to pixie
             List<Thing> l = DetectCollisions(vecLeft);
             if (l.Count > 0)
             {
-                Thing t = l[0];
-                t.AddNextUpdate(this); // become a child - attach to it.
-                this.AttachmentPosition = (this.Target - t.Target); // new relative position
+                foreach (Thing t in l)
+                {
+                    if (t is BadPixel)
+                    {
+                        BadPixel bp = t as BadPixel;
+                        if (bp.Parent is Pixie)
+                        {
+                            Level.Current.pixie.AddNextUpdate(this); // become a child - attach to it.
+                            AttachmentPosition = (Target - Level.Current.pixie.Target); // new relative position
+                            break;
+                        }
+                    }
+                    else if (t is Pixie)
+                    {
+                        Level.Current.pixie.AddNextUpdate(this); // become a child - attach to it.
+                        AttachmentPosition = (Target - Level.Current.pixie.Target); // new relative position  
+                      
+                        break;
+                    }
+                }
             }
 
             // check self-delete

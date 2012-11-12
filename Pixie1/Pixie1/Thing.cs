@@ -221,6 +221,7 @@ namespace Pixie1
             {
                 // if passable...
                 List<Thing> cols = DetectCollisions(TargetMove);
+                cols.RemoveAll(item => Children.Contains(item)); // do not heed attached items in collision - they move along
                 if (IsCollisionFree || (!CollidesWithBackground(TargetMove) && cols.Count==0 ) )
                 {
                     bool ok = true;
@@ -241,8 +242,10 @@ namespace Pixie1
                                     break;
                                 }
 
-                                // if not, test if it hits others
+                                // if not, test if it hits others that are not attached to same parent and are not pixie
                                 List<Thing> colsChild = t.DetectCollisions(TargetMove);
+                                colsChild.RemoveAll( item => Children.Contains(item) );
+                                colsChild.Remove(Level.Current.pixie);
                                 if (colsChild.Count > 0)
                                 {
                                     ok = false;
