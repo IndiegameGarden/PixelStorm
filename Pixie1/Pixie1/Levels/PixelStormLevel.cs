@@ -15,7 +15,7 @@ namespace Pixie1.Levels
     /// </summary>
     public class PixelStormLevel : Level
     {
-        public float MaxPauseBetweenBaddies = 2.5f;
+        public float MaxPauseBetweenBaddies = 1.5f;
 
         float timerNewBaddie = 0f;
         float nextBaddieInterval = 1f;
@@ -71,8 +71,11 @@ namespace Pixie1.Levels
             Add(Music);
 
             SubtitleText t = new SubtitleText();
-            t.AddText("Pixel, QUO VATRIS?", 6f);
-            t.StartTime = 3.751f;
+            t.AddText("This is Pixie.", 3.751f);
+            t.AddText("She's square, pink,\nand to the point.",3.751f);
+            t.AddText("Guide her through the...", 3.751f);
+            t.AddText("TETRASH!", 3.751f*2f);
+            t.StartTime = 0f;
             Subtitles.Show(0, t);
 
             /*
@@ -83,8 +86,8 @@ namespace Pixie1.Levels
             */
 
             t = new SubtitleText();
-            t.AddText("Music 'Layers' by Space Explorer(s)!\nCC-BY  SpaceExplorers.bandcamp.com", 10f);
-            t.AddText("FMOD Audio engine\n(c) Firelight Technologies Pty, Ltd. 2004-2009.", 6f);
+            t.AddText("Music by Space Explorer(s)!\nSpaceExplorers.bandcamp.com", 7f);
+            t.AddText("FMOD Audio engine\n(c) Firelight Technologies\nPty, Ltd. 2004-2009.", 6f);
             //t.Duration = 10f;
             Parent.Add(t);
             t.ScaleVector = new Vector2(1f, 1f);
@@ -143,10 +146,10 @@ namespace Pixie1.Levels
 
             // create new pixels falling
             timerNewBaddie += p.Dt;
-            if (timerNewBaddie >= nextBaddieInterval)
+            if (timerNewBaddie >= nextBaddieInterval && SimTime >= 11.0f )
             {
                 timerNewBaddie = 0f;
-                nextBaddieInterval = RandomMath.RandomBetween(0.5f, MaxPauseBetweenBaddies);
+                nextBaddieInterval = RandomMath.RandomBetween(0.3f, MaxPauseBetweenBaddies);
                 BadPixel b = BadPixel.Create( (int) Math.Round(RandomMath.RandomBetween(-0.49f,4.49f)));
                 float x = RandomMath.RandomBetween(40f,50f);
                 float y = RandomMath.RandomBetween(-20f,20f);

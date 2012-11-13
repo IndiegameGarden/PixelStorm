@@ -122,7 +122,7 @@ namespace Pixie1.Actors
                         {
                             pixie.AddNextUpdate(this); // become a child - attach to it.
                             AttachmentPosition = (new Vector2(PositionX, PositionY) - pixie.Target); // new relative position
-
+                            Level.Current.Subtitles.Show(2, "Ouch! That sticks!",3f);
                             break;
                         }
                     }
