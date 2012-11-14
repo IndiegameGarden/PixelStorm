@@ -21,9 +21,7 @@ namespace Pixie1
             soundScript = new SoundEvent("GameMusic");
             SampleSoundEvent ev1 = new SampleSoundEvent("layers.ogg"); 
             soundScript.AddEvent(0, ev1);
-            soundScript.AddEvent(300, ev1);
-            soundScript.AddEvent(600, ev1);
-            soundScript.AddEvent(900, ev1);
+            soundScript.AddEvent(240, ev1);
         }
 
         public float Volume
@@ -51,5 +49,9 @@ namespace Pixie1
 
         }
 
+        public void Fade(float amount)
+        {
+            Volume += amount;
+        }
     }
 }

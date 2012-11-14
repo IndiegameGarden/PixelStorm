@@ -39,6 +39,37 @@ namespace Pixie1.Actors
                 case 4:
                     tpString = "t-stick";
                     break;
+                case 5:
+                    tpString = "t-l-1";
+                    break;
+                case 6:
+                    tpString = "t-l-2";
+                    break;
+                case 7:
+                    tpString = "t-l-3";
+                    break;
+                case 8:
+                    tpString = "t-s-1";
+                    break;
+                case 9:
+                    tpString = "t-t";
+                    break;
+                case 10:
+                    tpString = "t-t-1";
+                    break;
+                case 11:
+                    tpString = "t-t-2";
+                    break;
+                case 12:
+                    tpString = "t-t-3";
+                    break;
+                case 13:
+                    tpString = "t-stick-1";
+                    break;
+                case 14:
+                    tpString = "t-z-1";
+                    break;
+
                 default:
                     tpString = "shape2x2";
                     break;

@@ -28,7 +28,8 @@ namespace Pixie1
         public Color ForegroundColor = Color.White;
 
         SpriteBatch spriteBatch;
-        static Vector2 PIXEL_OFFSET = new Vector2(0f, 9f);
+        //static Vector2 PIXEL_OFFSET = new Vector2(0f, 9f); // bg2045 needs it
+        static Vector2 PIXEL_OFFSET = new Vector2(0f, 0f);
 
         public LevelBackground(string bitmapFileName)
             : base(bitmapFileName)

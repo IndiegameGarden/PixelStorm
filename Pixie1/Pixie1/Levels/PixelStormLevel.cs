@@ -23,6 +23,7 @@ namespace Pixie1.Levels
         Color LEVEL_FOREGROUND_COLOR = new Color(231, 231, 248);
         float timeInWinningPos = 0f;
         bool hasWon = false;
+        bool hasLost = false;
         int numberOfZoomOuts = 0;
 
         public PixelStormLevel()
@@ -31,7 +32,7 @@ namespace Pixie1.Levels
             // Level settings
             SCREEN_MOTION_SPEED = 8.0f;
             DEFAULT_SCALE = 15f;// 15f;
-            PIXIE_STARTING_POS = new Vector2(350f, 681f); // in pixels        
+            PIXIE_STARTING_POS = new Vector2(13f, 201f); // in pixels        
             //PIXIE_STARTING_POS = new Vector2(73f, 10f); // in pixels        
             BG_STARTING_POS = PIXIE_STARTING_POS;
             //PIXIE_STARTING_POS = new Vector2(188f, 0f); // close to win pos
@@ -43,7 +44,7 @@ namespace Pixie1.Levels
             base.InitLevel();
 
             // select bitmap bg            
-            Background = new LevelBackground("bg2045.png");
+            Background = new LevelBackground("tetrash.png");
             Background.ForegroundColor = LEVEL_FOREGROUND_COLOR;
             Background.TargetSpeed = SCREEN_MOTION_SPEED;
             Add(Background);
@@ -86,15 +87,15 @@ namespace Pixie1.Levels
             */
 
             t = new SubtitleText();
-            t.AddText("Music by Space Explorer(s)!\nSpaceExplorers.bandcamp.com", 7f);
-            t.AddText("FMOD Audio engine\n(c) Firelight Technologies\nPty, Ltd. 2004-2009.", 6f);
+            t.AddText("Music by Space Explorer(s)!\nSpaceExplorers.bandcamp.com", 6f);
+            t.AddText("FMOD Audio engine\n(c) Firelight Technologies Pty, Ltd. 2004-2009.", 5f);
             //t.Duration = 10f;
             Parent.Add(t);
             t.ScaleVector = new Vector2(1f, 1f);
-            t.Motion.Scale = 0.35f ;/// DEFAULT_SCALE;
-            t.Motion.Position = new Vector2(0.33f,0.18f);
+            t.Motion.Scale = 0.32f ;/// DEFAULT_SCALE;
+            t.Motion.Position = new Vector2(0.3f,0.18f);
             //t.DrawInfo.Center = Vector2.Zero;
-            t.StartTime = 15.317f;
+            t.StartTime = 20f;
         }
 
         protected override bool ScreenBorderHit()
@@ -126,6 +127,15 @@ namespace Pixie1.Levels
             hasWon = true;            
         }
 
+        protected void PixieHasLost()
+        {
+            SubtitleText t = new SubtitleText();
+            t.AddText("YOU GOT TETRASHED", 6f);
+            t.AddText("*THE END*", 3f);
+            Subtitles.Show(6, t);
+            hasLost = true;
+        }
+
         protected override void OnUpdate(ref UpdateParams p)
         {
             base.OnUpdate(ref p);
@@ -150,7 +160,7 @@ namespace Pixie1.Levels
             {
                 timerNewBaddie = 0f;
                 nextBaddieInterval = RandomMath.RandomBetween(0.3f, MaxPauseBetweenBaddies);
-                BadPixel b = BadPixel.Create( (int) Math.Round(RandomMath.RandomBetween(-0.49f,4.49f)));
+                BadPixel b = BadPixel.Create( (int) Math.Round(RandomMath.RandomBetween(-0.49f,14.49f)));
                 float x = RandomMath.RandomBetween(40f,50f);
                 float y = RandomMath.RandomBetween(-20f,20f);
                 b.PositionAndTarget = new Vector2(x + LevelBackground.ViewPos.X, y + pixie.Target.Y);
@@ -158,7 +168,20 @@ namespace Pixie1.Levels
             }
 
             // scroll background
-            Background.Target = BG_STARTING_POS + new Vector2(SimTime,0f);
+            Background.Target.X = BG_STARTING_POS.X + 3.0f * SimTime;
+
+            // check lose - too much to left
+            if (pixie.Target.X < (Background.Target.X - 45f ) && !hasLost)
+            { 
+                PixieHasLost();
+            }
+
+            if (hasLost)
+            {
+                Music.Fade( -0.1f * p.Dt);
+                if (Music.Volume == 0)
+                    PixieGame.Instance.Exit();
+            }
         }
     }
 }
