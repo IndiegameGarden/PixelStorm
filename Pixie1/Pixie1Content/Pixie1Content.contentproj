@@ -65,14 +65,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="bg2045.png">
-      <Name>bg2045</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>PassThroughProcessor</Processor>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="t-block.png">
       <Name>t-block</Name>
       <Importer>TextureImporter</Importer>
