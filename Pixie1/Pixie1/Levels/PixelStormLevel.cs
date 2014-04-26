@@ -15,7 +15,7 @@ namespace Pixie1.Levels
     /// </summary>
     public class PixelStormLevel : Level
     {
-        public float MaxPauseBetweenBaddies = 1.5f;
+        public float MaxPauseBetweenBaddies = 0.6f;
 
         float timerNewBaddie = 0f;
         float nextBaddieInterval = 1f;
@@ -162,7 +162,7 @@ namespace Pixie1.Levels
                 nextBaddieInterval = RandomMath.RandomBetween(0.3f, MaxPauseBetweenBaddies);
                 BadPixel b = BadPixel.Create( (int) Math.Round(RandomMath.RandomBetween(-0.49f,14.49f)));
                 float x = RandomMath.RandomBetween(40f,50f);
-                float y = RandomMath.RandomBetween(-20f,20f);
+                float y = RandomMath.RandomBetween(-30f,30f);
                 b.PositionAndTarget = new Vector2(x + LevelBackground.ViewPos.X, y + pixie.Target.Y);
                 AddNextUpdate(b);
             }

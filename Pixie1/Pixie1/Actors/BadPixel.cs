@@ -96,6 +96,7 @@ namespace Pixie1.Actors
             */
 
             MyMotion = new LinearMotionBehavior(new Vector2(-1f, 0f));
+            MyMotion.MoveSpeed = 3.0f;
             Add(MyMotion);
         }
 
