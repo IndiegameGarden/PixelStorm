@@ -13,10 +13,9 @@ namespace Pixie1.Actors
         // behaviors - the things that bad pixels do 
         public BlinkBehavior Blinking;
         public ChaseBehavior  Chasing;
-        public AlwaysTurnRightBehavior Turning;
         public RandomWanderBehavior Wandering;
 
-        Vector2 vecLeft = new Vector2(-1f, 0f);
+        Vector2 vecLeft = new Vector2(0, 1f);
         LinearMotionBehavior MyMotion;
 
         public static BadPixel Create(int tp)
@@ -69,9 +68,11 @@ namespace Pixie1.Actors
                 case 14:
                     tpString = "t-z-1";
                     break;
-
+                case 15:
+                    tpString = "pixie";
+                    break;
                 default:
-                    tpString = "shape2x2";
+                    tpString = "pixie";
                     break;
             }
             return new BadPixel(tpString);
@@ -95,8 +96,8 @@ namespace Pixie1.Actors
             sub.Add(Wandering);
             */
 
-            MyMotion = new LinearMotionBehavior(new Vector2(-1f, 0f));
-            MyMotion.MoveSpeed = 3.0f;
+            MyMotion = new LinearMotionBehavior(new Vector2(0f, 1f));
+            MyMotion.MoveSpeed = RandomMath.RandomBetween(1f, 10f);
             Add(MyMotion);
         }
 
@@ -146,15 +147,19 @@ namespace Pixie1.Actors
                             if (bp.Parent is Pixie)
                             {
                                 pixie.AddNextUpdate(this); // become a child - attach to it.
-                                AttachmentPosition = (new Vector2(PositionX, PositionY) - pixie.Target); // new relative position
+                                AttachmentPosition = new Vector2(PositionX-pixie.PositionX, PositionY-pixie.PositionY) ; // new relative position
+                                pixie.Score += 1;
                                 break;
                             }
                         }
                         else if (t is Pixie)
                         {
                             pixie.AddNextUpdate(this); // become a child - attach to it.
-                            AttachmentPosition = (new Vector2(PositionX, PositionY) - pixie.Target); // new relative position
-                            Level.Current.Subtitles.Show(2, "Ouch! That sticks!",3f);
+                            //AttachmentPosition = (new Vector2(PositionX, PositionY) - pixie.Target); // new relative position
+                            //AttachmentPosition = new Vector2(1f,PositionY-pixie.TargetY); // new relative position
+                            AttachmentPosition = new Vector2(PositionX-pixie.PositionX, PositionY-pixie.PositionY) ; // new relative position
+                            //Level.Current.Subtitles.Show(2, "Ouch! That sticks!",3f);
+                            pixie.Score += 1;
                             break;
                         }
                     }
@@ -163,9 +168,9 @@ namespace Pixie1.Actors
 
             // check self-delete
             Vector2 pp = pixie.Target;
-            if (Target.X < pp.X - 80f)
+            if (PositionY > pixie.PositionY + 110f)
                 Delete = true;
-            if (CollidesWithBackground(Vector2.Zero) && SimTime < 0.2f)
+            if (SimTime < 0.2f && CollidesWithBackground(Vector2.Zero))
             {
                 Delete = true;
             }

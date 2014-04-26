@@ -9,9 +9,10 @@ namespace Pixie1.Actors
 {
     public class Pixie: Thing
     {
+        public int Score = 0;
 
         public Pixie()
-            : base("pixie")
+            : base("t-t-2")
         {            
             IsCollisionFree = false;
             DrawInfo.DrawColor = new Color(251, 101, 159);
