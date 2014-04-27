@@ -110,7 +110,7 @@ namespace Pixie1.Levels
             {
                 timerNewBaddie = 0f;
                 nextBaddieInterval = RandomMath.RandomBetween(0.3f, MaxPauseBetweenBaddies);
-                BadPixel b = BadPixel.Create( (int) Math.Round(RandomMath.RandomBetween(-0.49f,24.49f)));
+                BadPixel b = BadPixel.Create( (int) Math.Round(RandomMath.RandomBetween(-0.49f,23.49f)));
                 float x = RandomMath.RandomBetween(-40f,40f);
                 float y = RandomMath.RandomBetween(-50f,-40f);
                 b.PositionAndTarget = new Vector2(x + pixie.Target.X, y + LevelBackground.ViewPos.Y);

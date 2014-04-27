@@ -24,19 +24,13 @@ namespace Pixie1.Actors
             switch (tp)
             {
                 case 0:
+                case 1:
+                case 2:
+                case 3:
                     tpString = "t-block";
                     break;
-                case 1:
-                    tpString = "t-l";
-                    break;
-                case 2:
-                    tpString = "t-s";
-                    break;
-                case 3:
-                    tpString = "t-z";
-                    break;
                 case 4:
-                    tpString = "t-stick";
+                    tpString = "t-l";
                     break;
                 case 5:
                     tpString = "t-l-1";
@@ -48,28 +42,40 @@ namespace Pixie1.Actors
                     tpString = "t-l-3";
                     break;
                 case 8:
-                    tpString = "t-s-1";
-                    break;
                 case 9:
-                    tpString = "t-t";
+                    tpString = "t-s";
                     break;
                 case 10:
-                    tpString = "t-t-1";
-                    break;
                 case 11:
-                    tpString = "t-t-2";
+                    tpString = "t-s-1";
                     break;
                 case 12:
-                    tpString = "t-t-3";
-                    break;
                 case 13:
-                    tpString = "t-stick-1";
+                    tpString = "t-z";
                     break;
                 case 14:
+                case 15:
                     tpString = "t-z-1";
                     break;
-                case 15:
-                    tpString = "pixie";
+                case 16:
+                case 17:
+                    tpString = "t-stick";
+                    break;
+                case 18:
+                case 19:
+                    tpString = "t-stick-1";
+                    break;
+                case 20:
+                    tpString = "t-t";
+                    break;
+                case 21:
+                    tpString = "t-t-1";
+                    break;
+                case 22:
+                    tpString = "t-t-2";
+                    break;
+                case 23:
+                    tpString = "t-t-3";
                     break;
                 default:
                     tpString = "pixie";
