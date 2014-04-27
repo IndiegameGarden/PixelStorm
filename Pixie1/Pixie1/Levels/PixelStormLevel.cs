@@ -22,9 +22,6 @@ namespace Pixie1.Levels
         float nextBaddieInterval = 1f;
         Vector2 WINNING_POSITION = new Vector2(73f, 7f);
         Color LEVEL_FOREGROUND_COLOR = new Color(231, 231, 248);
-        float timeInWinningPos = 0f;
-        bool hasWon = false;
-        bool hasLost = false;
         int numberOfZoomOuts = 0;
 
         public PixelStormLevel()
@@ -32,7 +29,7 @@ namespace Pixie1.Levels
         {           
             // Level settings
             SCREEN_MOTION_SPEED = 8.0f;
-            DEFAULT_SCALE = 10f;// 15f;
+            DEFAULT_SCALE = 20f;// 15f;
             PIXIE_STARTING_POS = new Vector2(195f, 734f); // in pixels        
             //PIXIE_STARTING_POS = new Vector2(73f, 10f); // in pixels        
             BG_STARTING_POS = PIXIE_STARTING_POS;
@@ -97,6 +94,19 @@ namespace Pixie1.Levels
             }
             return true;
         }
+
+        // scroll the level background to match pixie
+        protected override void ScrollBackground(ref UpdateParams p)
+        {
+            // scrolling background at borders
+            Vector2 pixiePos = pixie.Motion.PositionAbs;
+
+            if (pixiePos.X < BOUND_X || pixiePos.X > (Screen.Width - BOUND_X))
+            {            
+                Background.Target.X = pixie.Position.X;
+            }             
+        }
+
 
         protected override void OnUpdate(ref UpdateParams p)
         {

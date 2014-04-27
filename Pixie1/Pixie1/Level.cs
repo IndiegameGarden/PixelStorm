@@ -165,15 +165,6 @@ namespace Pixie1
         // scroll the level background to match pixie
         protected virtual void ScrollBackground(ref UpdateParams p)
         {
-            // scrolling background at borders
-            Vector2 pixiePos = pixie.Motion.PositionAbs;
-
-            if (pixiePos.Y < BOUND_Y || pixiePos.Y > (Screen.Height - BOUND_Y))
-            {
-                if (ScreenBorderHit())
-                    Background.Target.Y = pixie.Position.Y;
-            }
-             
         }
 
         /// <summary>
