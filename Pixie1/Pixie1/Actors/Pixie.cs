@@ -12,7 +12,7 @@ namespace Pixie1.Actors
         public int Score = 0;
 
         public Pixie()
-            : base("t-t-2")
+            : base("t-t-2-white")
         {            
             IsCollisionFree = false;
             DrawInfo.DrawColor = new Color(251, 101, 159);
