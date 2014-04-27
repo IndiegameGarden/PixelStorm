@@ -70,10 +70,8 @@ namespace Pixie1.Levels
             Add(Music);
 
             SubtitleText t = new SubtitleText(); 
-            t.AddText("T - go up and build a tree!", 4.751f).ScaleVector = new Vector2(1f, 1f); ;
-            //t.AddText("She's square, pink,\nand to the point.",3.751f);
-            //t.AddText("Guide her through the...", 3.751f);
-            //t.AddText("TETRASH!", 3.751f*2f);
+            t.AddText("Go, T! Go up...", 4.751f).ScaleVector = new Vector2(1f, 1f);
+            t.AddText("...and build a tree!", 4.751f).ScaleVector = new Vector2(1f, 1f);
             t.StartTime = 0f;
             Subtitles.Show(0, t);
 
@@ -128,7 +126,7 @@ namespace Pixie1.Levels
             }
             if (pixie.Score > 0)
             {
-                tObjCount.Text = "Branches: " + pixie.Score;
+                tObjCount.Text = "Tree-score: " + pixie.Score;
                 tObjCount.Motion.Position = new Vector2(Screen.Width-0.25f, 0.035f); 
             }
             // scroll background
