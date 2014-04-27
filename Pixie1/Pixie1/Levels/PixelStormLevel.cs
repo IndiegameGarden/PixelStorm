@@ -84,12 +84,12 @@ namespace Pixie1.Levels
 
         protected override bool ScreenBorderHit()
         {
-            if (numberOfZoomOuts < 0)
+            if (numberOfZoomOuts < 5)
             {
                 numberOfZoomOuts++;
-                Motion.Scale /= 2.0f;
-                //Motion.ScaleTarget /= 2.0f;
-                //Motion.ScaleSpeed = 0.2f;
+                //Motion.Scale /= 1.5f;
+                Motion.ScaleTarget /= 1.5f;
+                Motion.ScaleSpeed = 0.2f;
                 return false;
             }
             return true;
@@ -133,6 +133,11 @@ namespace Pixie1.Levels
             }
             // scroll background
             Background.Target.Y = BG_STARTING_POS.Y - 3.0f * SimTime;
+
+            // resolution scale changing
+            if (Background.Target.Y < 720f && numberOfZoomOuts == 0) ScreenBorderHit();
+            if (Background.Target.Y < 710f && numberOfZoomOuts == 1) ScreenBorderHit();
+            if (Background.Target.Y < 700f && numberOfZoomOuts == 2) ScreenBorderHit();
 
             /*
             if (hasLost)
