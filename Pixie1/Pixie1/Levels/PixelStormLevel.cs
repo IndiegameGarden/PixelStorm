@@ -16,7 +16,7 @@ namespace Pixie1.Levels
     public class PixelStormLevel : Level
     {
         public SubtitleText tObjCount;
-        public float MaxPauseBetweenBaddies = 0.3f;
+        public float MaxPauseBetweenBaddies = 0.6f;
 
         float timerNewBaddie = 0f;
         float nextBaddieInterval = 1f;
@@ -134,8 +134,8 @@ namespace Pixie1.Levels
 
             // resolution scale changing
             if (Background.Target.Y < 720f && numberOfZoomOuts == 0) ScreenBorderHit();
-            if (Background.Target.Y < 710f && numberOfZoomOuts == 1) ScreenBorderHit();
-            if (Background.Target.Y < 700f && numberOfZoomOuts == 2) ScreenBorderHit();
+            //if (Background.Target.Y < 710f && numberOfZoomOuts == 1) ScreenBorderHit();
+            //if (Background.Target.Y < 700f && numberOfZoomOuts == 2) ScreenBorderHit();
 
             /*
             if (hasLost)
