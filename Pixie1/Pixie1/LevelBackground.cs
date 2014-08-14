@@ -36,7 +36,7 @@ namespace Pixie1
         {
             spriteBatch = new SpriteBatch(Screen.graphicsDevice);
         }
-        
+
         public Color SamplePixel(Vector2 pos)
         {
             if (pos.X < 0f || pos.X > (Texture.Width - 1) ||
@@ -44,9 +44,9 @@ namespace Pixie1
             {
                 return BackgroundColor;
             }
-            Color[] data = new Color[1];
-            Texture.GetData<Color>(0, new Rectangle((int)Math.Round(pos.X), (int)Math.Round(pos.Y), 1, 1), data, 0, 1);
-            return data[0];
+            int x = (int)Math.Round(pos.X);
+            int y = (int)Math.Round(pos.Y);
+            return textureData[x + y * Texture.Width];
         }
 
         public void SetPixel(Vector2 pos, Color color)
@@ -58,7 +58,10 @@ namespace Pixie1
             }
             Color[] data = new Color[1];
             data[0] = color;
-            Texture.SetData<Color>(0, new Rectangle((int)Math.Round(pos.X), (int)Math.Round(pos.Y), 1, 1), data, 0, 1);
+            int x = (int)Math.Round(pos.X);
+            int y = (int)Math.Round(pos.Y);
+            textureData[x + y * Texture.Width] = color;
+            Texture.SetData<Color>(0, new Rectangle(x, y, 1, 1), data, 0, 1);
         }
 
         protected override void OnUpdate(ref UpdateParams p)
