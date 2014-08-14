@@ -17,11 +17,9 @@ namespace Pixie1
 
         public GameMusic()
         {
-            //track = TTengineMaster.ActiveGame.Content.Load<Song>("A01");
             soundScript = new SoundEvent("GameMusic");
             SampleSoundEvent ev1 = new SampleSoundEvent("layers.ogg"); 
-            soundScript.AddEvent(0, ev1);
-            soundScript.AddEvent(240, ev1);
+            soundScript.AddEvent(0.5, ev1);
         }
 
         public float Volume
