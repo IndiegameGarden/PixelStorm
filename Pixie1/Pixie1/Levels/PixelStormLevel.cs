@@ -15,14 +15,16 @@ namespace Pixie1.Levels
     /// </summary>
     public class PixelStormLevel : Level
     {
+        public static float SCROLL_SPEED_PIXELS_PER_SEC = 3f;
+        public static float MaxPauseBetweenBaddies = 0.6f;
+        public static float SCROLLING_START_TIME = 9f;
+        public static Vector2 WINNING_POSITION = new Vector2(73f, 7f);
+        public static Color LEVEL_FOREGROUND_COLOR = new Color(231, 231, 248);
+
         public SubtitleText tObjCount;
-        public float MaxPauseBetweenBaddies = 0.6f;
-        public float SCROLLING_START_TIME = 5f;
 
         float timerNewBaddie = 0f;
         float nextBaddieInterval = 1f;
-        Vector2 WINNING_POSITION = new Vector2(73f, 7f);
-        Color LEVEL_FOREGROUND_COLOR = new Color(231, 231, 248);
         int numberOfZoomOuts = 0;
 
         public PixelStormLevel()
@@ -30,10 +32,10 @@ namespace Pixie1.Levels
         {           
             // Level settings
             SCREEN_MOTION_SPEED = 8.0f;
-            DEFAULT_SCALE = 20f;// 15f;
-            PIXIE_STARTING_POS = new Vector2(95f, 718f); // in pixels        
+            DEFAULT_SCALE = 15f;// 15f;
+            PIXIE_STARTING_POS = new Vector2(96f, 690f); // in pixels        
             //PIXIE_STARTING_POS = new Vector2(73f, 10f); // in pixels        
-            BG_STARTING_POS = PIXIE_STARTING_POS;
+            BG_STARTING_POS = new Vector2(96f,720f);
             //PIXIE_STARTING_POS = new Vector2(188f, 0f); // close to win pos
             //BG_STARTING_POS = new Vector2(188f, 0f); 
         }
@@ -47,7 +49,7 @@ namespace Pixie1.Levels
             Background.ForegroundColor = LEVEL_FOREGROUND_COLOR;
             Background.TargetSpeed = SCREEN_MOTION_SPEED;
             Add(Background);
-            Background.Target = PIXIE_STARTING_POS;
+            Background.Target = BG_STARTING_POS;
             Background.Position = BG_STARTING_POS;
         }
 
@@ -62,7 +64,7 @@ namespace Pixie1.Levels
             base.InitToys();
             Vector2 p;
             Toy t;
-            t = new ZoomOutToy(); p = PIXIE_STARTING_POS + new Vector2(1f,-12f); t.PositionAndTarget = p; Add(t);
+            //t = new ZoomOutToy(); p = PIXIE_STARTING_POS + new Vector2(1f,-12f); t.PositionAndTarget = p; Add(t);
         }
 
         protected override void InitLevelSpecific()
@@ -132,10 +134,11 @@ namespace Pixie1.Levels
             }
             // scroll background
             if (SimTime >= SCROLLING_START_TIME)
-                Background.Target.Y = BG_STARTING_POS.Y - 3.0f * (SimTime-SCROLLING_START_TIME);
+                Background.Target.Y = BG_STARTING_POS.Y - SCROLL_SPEED_PIXELS_PER_SEC * (SimTime-SCROLLING_START_TIME);
 
             // resolution scale changing
-            if (Background.Target.Y < 720f && numberOfZoomOuts == 0) ScreenBorderHit();
+            if (SimTime>= SCROLLING_START_TIME && Background.Target.Y < 700f && numberOfZoomOuts == 0) 
+                ScreenBorderHit();
             //if (Background.Target.Y < 710f && numberOfZoomOuts == 1) ScreenBorderHit();
             //if (Background.Target.Y < 700f && numberOfZoomOuts == 2) ScreenBorderHit();
 

@@ -99,12 +99,14 @@
     <Compile Include="Behaviors\LinearMotionBehavior.cs" />
     <Compile Include="Actors\BadPixel.cs" />
     <Compile Include="Behaviors\AlwaysTurnRightBehavior.cs" />
+    <Compile Include="Behaviors\MoveUpBehavior.cs" />
     <Compile Include="Behaviors\RandomWanderBehavior.cs" />
     <Compile Include="Behaviors\ReverseControlBehavior.cs" />
     <Compile Include="Behaviors\BlinkBehaviour.cs" />
     <Compile Include="Behaviors\ChaseBehavior.cs" />
     <Compile Include="Behaviors\ColorCycleBehavior.cs" />
     <Compile Include="Behaviors\SubsumptionBehavior.cs" />
+    <Compile Include="Behaviors\TetrisFallBehavior.cs" />
     <Compile Include="Levels\PixelStormLevel.cs" />
     <Compile Include="RotatingBackground.cs" />
     <Compile Include="FinalScreen.cs" />

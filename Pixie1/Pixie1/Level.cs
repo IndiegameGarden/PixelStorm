@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Graphics;
 using Pixie1.Actors;
+using Pixie1.Behaviors;
 
 namespace Pixie1
 {
@@ -102,6 +103,8 @@ namespace Pixie1
 
             keyControl = new PixieKeyControl();
             pixie.Add(keyControl);
+
+            pixie.Add(new TetrisFallBehavior());
         }
 
         /// <summary>
