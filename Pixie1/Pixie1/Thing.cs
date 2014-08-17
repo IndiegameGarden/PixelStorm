@@ -439,9 +439,9 @@ namespace Pixie1
                                          (y - rectangleA.Top) * rectangleA.Width];
                     Color colorB = dataB[(x) + (y) * bgWidth];
 
-                    // If pixel A not completely transparent,
+                    // If pixel A and pixel B not completely transparent,
                     // and BG pixel non-passable (by comparing intensity to threshold),
-                    if (colorA.A != 0 && (colorB.R + colorB.G + colorB.B) < PassableIntensityThreshold)
+                    if (colorA.A != 0 && colorB.A != 0 && (colorB.R + colorB.G + colorB.B) > PassableIntensityThreshold)
                     {
                         // then an intersection has been found
                         return true;

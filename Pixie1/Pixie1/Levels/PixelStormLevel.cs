@@ -17,6 +17,7 @@ namespace Pixie1.Levels
     {
         public SubtitleText tObjCount;
         public float MaxPauseBetweenBaddies = 0.6f;
+        public float SCROLLING_START_TIME = 5f;
 
         float timerNewBaddie = 0f;
         float nextBaddieInterval = 1f;
@@ -30,7 +31,7 @@ namespace Pixie1.Levels
             // Level settings
             SCREEN_MOTION_SPEED = 8.0f;
             DEFAULT_SCALE = 20f;// 15f;
-            PIXIE_STARTING_POS = new Vector2(195f, 734f); // in pixels        
+            PIXIE_STARTING_POS = new Vector2(95f, 718f); // in pixels        
             //PIXIE_STARTING_POS = new Vector2(73f, 10f); // in pixels        
             BG_STARTING_POS = PIXIE_STARTING_POS;
             //PIXIE_STARTING_POS = new Vector2(188f, 0f); // close to win pos
@@ -59,9 +60,9 @@ namespace Pixie1.Levels
         protected override void InitToys()
         {
             base.InitToys();
-            //Vector2 p;
-            //Toy t;
-            //t = new ZoomOutToy(); p = new Vector2(70f,48f); t.PositionAndTarget = p; Add(t);
+            Vector2 p;
+            Toy t;
+            t = new ZoomOutToy(); p = PIXIE_STARTING_POS + new Vector2(1f,-12f); t.PositionAndTarget = p; Add(t);
         }
 
         protected override void InitLevelSpecific()
@@ -130,7 +131,8 @@ namespace Pixie1.Levels
                 tObjCount.Motion.Position = new Vector2(Screen.Width-0.25f, 0.035f); 
             }
             // scroll background
-            Background.Target.Y = BG_STARTING_POS.Y - 3.0f * SimTime;
+            if (SimTime >= SCROLLING_START_TIME)
+                Background.Target.Y = BG_STARTING_POS.Y - 3.0f * (SimTime-SCROLLING_START_TIME);
 
             // resolution scale changing
             if (Background.Target.Y < 720f && numberOfZoomOuts == 0) ScreenBorderHit();
