@@ -17,7 +17,7 @@ namespace Pixie1.Levels
     {
         public static float SCROLL_SPEED_PIXELS_PER_SEC = 3f;
         public static float MaxPauseBetweenBaddies = 0.6f;
-        public static float SCROLLING_START_TIME = 9f;
+        public static float SCROLLING_START_TIME = 7.5f;
         public static Vector2 WINNING_POSITION = new Vector2(73f, 7f);
         public static Color LEVEL_FOREGROUND_COLOR = new Color(231, 231, 248);
 
@@ -135,10 +135,11 @@ namespace Pixie1.Levels
             // scroll background
             if (SimTime >= SCROLLING_START_TIME)
                 Background.Target.Y = BG_STARTING_POS.Y - SCROLL_SPEED_PIXELS_PER_SEC * (SimTime-SCROLLING_START_TIME);
+                //Level.Current.Background.Motion.ZoomCenterTarget = Level.Current.pixie.Motion;
 
             // resolution scale changing
-            if (SimTime>= SCROLLING_START_TIME && Background.Target.Y < 700f && numberOfZoomOuts == 0) 
-                ScreenBorderHit();
+            //if (SimTime>= SCROLLING_START_TIME && Background.Target.Y < 700f && numberOfZoomOuts == 0) 
+            //    ScreenBorderHit();
             //if (Background.Target.Y < 710f && numberOfZoomOuts == 1) ScreenBorderHit();
             //if (Background.Target.Y < 700f && numberOfZoomOuts == 2) ScreenBorderHit();
 
