@@ -16,7 +16,8 @@ namespace Pixie1.Levels
     public class PixelStormLevel : Level
     {
         public static float SCROLL_SPEED_PIXELS_PER_SEC = 3f;
-        public static float MaxPauseBetweenBaddies = 0.6f;
+        public static float MinPauseBetweenBaddies = 0.9f;
+        public static float MaxPauseBetweenBaddies = 3.6f;
         public static float SCROLLING_START_TIME = 7.5f;
         public static Vector2 WINNING_POSITION = new Vector2(73f, 7f);
         public static Color LEVEL_FOREGROUND_COLOR = new Color(231, 231, 248);
@@ -85,7 +86,7 @@ namespace Pixie1.Levels
 
         protected override bool ScreenBorderHit()
         {
-            if (numberOfZoomOuts < 5)
+            if (numberOfZoomOuts < 3)
             {
                 numberOfZoomOuts++;
                 //Motion.Scale /= 1.5f;
@@ -120,7 +121,7 @@ namespace Pixie1.Levels
             if (timerNewBaddie >= nextBaddieInterval && SimTime >= 4.0f )
             {
                 timerNewBaddie = 0f;
-                nextBaddieInterval = RandomMath.RandomBetween(0.3f, MaxPauseBetweenBaddies);
+                nextBaddieInterval = RandomMath.RandomBetween(MinPauseBetweenBaddies, MaxPauseBetweenBaddies);
                 BadPixel b = BadPixel.Create( (int) Math.Round(RandomMath.RandomBetween(-0.49f,23.49f)));
                 float x = RandomMath.RandomBetween(-40f,40f);
                 float y = RandomMath.RandomBetween(-50f,-40f);
