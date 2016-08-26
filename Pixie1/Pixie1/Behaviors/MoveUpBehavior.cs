@@ -4,11 +4,14 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Pixie1.Levels;
+using Pixie1.Actors;
 
 namespace Pixie1.Behaviors
 {
     public class MoveUpBehavior: ThingControl
     {
+        public Vector2 UP_VECTOR = new Vector2(0f, -1f);
+
         protected override void OnInit()
         {
             base.OnInit();
@@ -25,7 +28,9 @@ namespace Pixie1.Behaviors
         protected override void OnNextMove()
         {
             base.OnNextMove();
-            TargetMove = new Vector2(0f, -1f);
+            Pixie p = (ParentThing as Pixie);
+            if (!p.CollidesWithBackground(UP_VECTOR))
+                TargetMove = UP_VECTOR;
         }
     }
 }

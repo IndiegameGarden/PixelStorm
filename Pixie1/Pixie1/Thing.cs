@@ -176,10 +176,6 @@ namespace Pixie1
         {
             base.OnUpdate(ref p);
 
-            // update BoundingRectangle values
-            BoundingRectangle.X = PositionX;
-            BoundingRectangle.Y = PositionY;
-
             // update position of the smooth motion of this Thing in the TTengine
             // update position when attached to a parent Thing
             if (Parent is Thing)
@@ -214,15 +210,12 @@ namespace Pixie1
             {
                 FacingDirection = TargetMove;
                 FacingDirection.Normalize();
-            }
 
-            // take steering inputs if any, and move Thing, applying collision detection
-            if (TargetMove.LengthSquared() > 0f)
-            {
+                // take steering inputs if any, and move Thing, applying collision detection
                 // if passable...
                 List<Thing> cols = DetectCollisions(TargetMove);
-                cols.RemoveAll(item => Children.Contains(item)); // do not heed attached items in collision - they move along
-                if (IsCollisionFree || (!CollidesWithBackground(TargetMove) && cols.Count==0 ) )
+                cols.RemoveAll(item => Children.Contains(item)); // do not heed my own attached-items in collision - they move along
+                if (IsCollisionFree || (!CollidesWithBackground(TargetMove) && cols.Count == 0))
                 {
                     bool ok = true;
                     if (!IsCollisionFree)
@@ -244,7 +237,7 @@ namespace Pixie1
 
                                 // if not, test if it hits others that are not attached to same parent and are not pixie
                                 List<Thing> colsChild = t.DetectCollisions(TargetMove);
-                                colsChild.RemoveAll( item => Children.Contains(item) );
+                                colsChild.RemoveAll(item => Children.Contains(item));
                                 colsChild.Remove(Level.Current.pixie);
                                 if (colsChild.Count > 0)
                                 {
@@ -261,15 +254,14 @@ namespace Pixie1
                         TTutil.Round(ref Target);
                     }
                 }
-                
-            }            
+            }
 
             Vector2 vdif = Target - Position;
             if (vdif.LengthSquared() > 0f) // if target not reached yet
             {
                 Vector2 vmove = vdif;
                 vmove.Normalize();
-                vmove *= TargetSpeed * Velocity ;
+                vmove *= TargetSpeed * Velocity;
                 // convert speed vector to move vector (x = v * t)
                 vmove *= p.Dt;
                 // check if target reached already (i.e. move would overshoot target)
@@ -283,6 +275,12 @@ namespace Pixie1
                     Position += vmove;
                 }
             }
+
+        }
+
+        protected override void OnUpdatePost(ref UpdateParams p)
+        {
+            base.OnUpdatePost(ref p);
 
         }
 
@@ -310,11 +308,21 @@ namespace Pixie1
 
         public bool Collides(Thing other)
         {
+            // update BoundingRectangle values to latest and greatest
+            BoundingRectangle.X = PositionX;
+            BoundingRectangle.Y = PositionY;
+            other.BoundingRectangle.X = other.PositionX;
+            other.BoundingRectangle.Y = other.PositionY;
             return IntersectPixels(BoundingRectangle, textureData, other.BoundingRectangle, other.textureData );
         }
 
         public bool CollidesWhenThisMoves(Thing other, Vector2 myPotentialMove)
         {
+            // update BoundingRectangle values to latest and greatest
+            BoundingRectangle.X = PositionX;
+            BoundingRectangle.Y = PositionY;
+            other.BoundingRectangle.X = other.PositionX;
+            other.BoundingRectangle.Y = other.PositionY;
             Rectangle rectNow = BoundingRectangle;
             Rectangle rectMoved = new Rectangle(rectNow.X + (int) Math.Round(myPotentialMove.X) ,
                                             rectNow.Y + (int) Math.Round(myPotentialMove.Y) ,
@@ -324,6 +332,11 @@ namespace Pixie1
 
         public bool CollidesWhenOtherMoves(Thing other, Vector2 othersPotentialMove)
         {
+            // update BoundingRectangle values to latest and greatest
+            BoundingRectangle.X = PositionX;
+            BoundingRectangle.Y = PositionY;
+            other.BoundingRectangle.X = other.PositionX;
+            other.BoundingRectangle.Y = other.PositionY;
             Rectangle rectOther = other.BoundingRectangle;
             Rectangle rectMoved = new Rectangle(rectOther.X + (int)Math.Round(othersPotentialMove.X),
                                             rectOther.Y + (int)Math.Round(othersPotentialMove.Y),

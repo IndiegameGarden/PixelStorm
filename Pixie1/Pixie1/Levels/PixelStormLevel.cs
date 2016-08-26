@@ -23,6 +23,7 @@ namespace Pixie1.Levels
         public static Color LEVEL_FOREGROUND_COLOR = new Color(231, 231, 248);
 
         public SubtitleText tObjCount;
+        public Boolean hasLost = false;
 
         float timerNewBaddie = 0f;
         float nextBaddieInterval = 1f;
@@ -143,15 +144,18 @@ namespace Pixie1.Levels
             //    ScreenBorderHit();
             //if (Background.Target.Y < 710f && numberOfZoomOuts == 1) ScreenBorderHit();
             //if (Background.Target.Y < 700f && numberOfZoomOuts == 2) ScreenBorderHit();
+            
+            // test position on screen - if pixie beneath lower border much, lose
+            if (SimTime>= SCROLLING_START_TIME && !hasLost && ( pixie.Motion.PositionAbsZoomedPixels.Y > Screen.HeightPixels + 100f ))
+                hasLost = true;
 
-            /*
             if (hasLost)
             {
                 Music.Fade( -0.1f * p.Dt);
+                this.Background.DrawInfo.DrawColor = Color.White * Music.Volume;
                 if (Music.Volume == 0)
                     PixieGame.Instance.Exit();
             }
-             */
         }
     }
 }

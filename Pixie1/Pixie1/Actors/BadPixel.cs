@@ -15,7 +15,7 @@ namespace Pixie1.Actors
         public ChaseBehavior  Chasing;
         public RandomWanderBehavior Wandering;
 
-        Vector2 vecLeft = new Vector2(0, 1f);
+        Vector2 vecDown = new Vector2(0, 1f);
         LinearMotionBehavior MyMotion;
 
         public static BadPixel Create(int tp)
@@ -125,10 +125,13 @@ namespace Pixie1.Actors
                 isCloaky = value;                
             }
         }
+
         protected override void OnUpdate(ref UpdateParams p)
         {
             base.OnUpdate(ref p);
             Pixie pixie = Level.Current.pixie;
+            // if attached, disable motion
+            MyMotion.Active = true; // !(Parent is Pixie);
 
             // hack - not visible at first to avoid position-flicker
             if (SimTime < 0.3f)
@@ -136,13 +139,10 @@ namespace Pixie1.Actors
             else
                 Visible = true;
 
-            // if attached, disable motion
-            MyMotion.Active = true; // !(Parent is Pixie);
-
             // check start of attachment to pixie
             if (!(Parent is Thing))
             {
-                List<Thing> l = DetectCollisions(vecLeft);
+                List<Thing> l = DetectCollisions(vecDown);
                 if (l.Count > 0)
                 {
                     foreach (Thing t in l)
@@ -153,7 +153,7 @@ namespace Pixie1.Actors
                             if (bp.Parent is Pixie)
                             {
                                 pixie.AddNextUpdate(this); // become a child - attach to it.
-                                AttachmentPosition = new Vector2(PositionX-pixie.PositionX, PositionY-pixie.PositionY) ; // new relative position
+                                AttachmentPosition = new Vector2(PositionX - pixie.PositionX, PositionY - pixie.PositionY); // new relative position
                                 pixie.Score += 1;
                                 break;
                             }
@@ -163,7 +163,7 @@ namespace Pixie1.Actors
                             pixie.AddNextUpdate(this); // become a child - attach to it.
                             //AttachmentPosition = (new Vector2(PositionX, PositionY) - pixie.Target); // new relative position
                             //AttachmentPosition = new Vector2(1f,PositionY-pixie.TargetY); // new relative position
-                            AttachmentPosition = new Vector2(PositionX-pixie.PositionX, PositionY-pixie.PositionY) ; // new relative position
+                            AttachmentPosition = new Vector2(PositionX - pixie.PositionX, PositionY - pixie.PositionY); // new relative position
                             //Level.Current.Subtitles.Show(2, "Ouch! That sticks!",3f);
                             pixie.Score += 1;
                             break;
@@ -171,15 +171,20 @@ namespace Pixie1.Actors
                     }
                 }
             }
-
+        
             // check self-delete
             Vector2 pp = pixie.Target;
-            if (PositionY > pixie.PositionY + 110f)
+            if (PositionY > pixie.PositionY + 130f)     // if way down player somewhere, delete
                 Delete = true;
-            if (SimTime < 0.2f && CollidesWithBackground(Vector2.Zero))
+            if (SimTime < 0.2f && CollidesWithBackground(Vector2.Zero))  // new entities that get stuck on background - delete
             {
                 Delete = true;
             }
+
+        }
+
+        protected override void OnUpdatePost(ref UpdateParams p) 
+        {
 
         }
     }
