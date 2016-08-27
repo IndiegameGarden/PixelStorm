@@ -21,7 +21,7 @@ namespace Pixie1
         protected override void OnUpdate(ref UpdateParams p)
         {
             base.OnUpdate(ref p);
-
+            MoveSpeed = 1.5f;
             float dx = 0f, dy = 0f;
 
             KeyboardState kb = Keyboard.GetState();
@@ -33,6 +33,7 @@ namespace Pixie1
             }
             else if (kb.IsKeyDown(Keys.Down) || kb.IsKeyDown(Keys.S))
             {
+                MoveSpeed = 4.5f;
                 if (pressTime == 0f)
                     dy = +1.0f;
                 pressTime += p.Dt;
