@@ -176,6 +176,10 @@ namespace Pixie1
         {
             base.OnUpdate(ref p);
 
+            // update BoundingRectangle values to latest and greatest
+            BoundingRectangle.X = TargetX;
+            BoundingRectangle.Y = TargetY;
+
             // update position of the smooth motion of this Thing in the TTengine
             // update position when attached to a parent Thing
             if (Parent is Thing)
@@ -314,20 +318,20 @@ namespace Pixie1
         public bool Collides(Thing other)
         {
             // update BoundingRectangle values to latest and greatest
-            BoundingRectangle.X = PositionX;
-            BoundingRectangle.Y = PositionY;
-            other.BoundingRectangle.X = other.PositionX;
-            other.BoundingRectangle.Y = other.PositionY;
+            BoundingRectangle.X = TargetX;
+            BoundingRectangle.Y = TargetY;
+            other.BoundingRectangle.X = other.TargetX;
+            other.BoundingRectangle.Y = other.TargetY;
             return IntersectPixels(BoundingRectangle, textureData, other.BoundingRectangle, other.textureData );
         }
 
         public bool CollidesWhenThisMoves(Thing other, Vector2 myPotentialMove)
         {
             // update BoundingRectangle values to latest and greatest
-            BoundingRectangle.X = PositionX;
-            BoundingRectangle.Y = PositionY;
-            other.BoundingRectangle.X = other.PositionX;
-            other.BoundingRectangle.Y = other.PositionY;
+            BoundingRectangle.X = TargetX;
+            BoundingRectangle.Y = TargetY;
+            other.BoundingRectangle.X = other.TargetX;
+            other.BoundingRectangle.Y = other.TargetY;
             Rectangle rectNow = BoundingRectangle;
             Rectangle rectMoved = new Rectangle(rectNow.X + (int) Math.Round(myPotentialMove.X) ,
                                             rectNow.Y + (int) Math.Round(myPotentialMove.Y) ,
@@ -338,10 +342,10 @@ namespace Pixie1
         public bool CollidesWhenOtherMoves(Thing other, Vector2 othersPotentialMove)
         {
             // update BoundingRectangle values to latest and greatest
-            BoundingRectangle.X = PositionX;
-            BoundingRectangle.Y = PositionY;
-            other.BoundingRectangle.X = other.PositionX;
-            other.BoundingRectangle.Y = other.PositionY;
+            BoundingRectangle.X = TargetX;
+            BoundingRectangle.Y = TargetY;
+            other.BoundingRectangle.X = other.TargetX;
+            other.BoundingRectangle.Y = other.TargetY;
             Rectangle rectOther = other.BoundingRectangle;
             Rectangle rectMoved = new Rectangle(rectOther.X + (int)Math.Round(othersPotentialMove.X),
                                             rectOther.Y + (int)Math.Round(othersPotentialMove.Y),

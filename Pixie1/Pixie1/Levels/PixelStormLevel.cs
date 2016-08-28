@@ -82,6 +82,7 @@ namespace Pixie1.Levels
 
             tObjCount = new SubtitleText(""); tObjCount.ScaleVector = new Vector2(0.8f, 1f);            
             tObjCount.StartTime = 0f;
+            tObjCount.Motion.Position = new Vector2(Screen.Width - 0.25f, 0.035f); 
             Subtitles.Show(-2, tObjCount);
         }
 
