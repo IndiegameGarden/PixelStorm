@@ -76,14 +76,15 @@ namespace Pixie1.Levels
             Add(Music);
 
             SubtitleText t = new SubtitleText(); 
-            t.AddText("Go, T! Go up...", 4.751f).ScaleVector = new Vector2(1f, 1f);
-            t.AddText("...and build a tree!", 4.751f).ScaleVector = new Vector2(1f, 1f);
+            t.AddText("Always down. I want to go free!", 4.751f).ScaleVector = new Vector2(1f, 1f);
+            t.AddText("See the world, and be ... a tree!", 4.751f).ScaleVector = new Vector2(1f, 1f);
             t.StartTime = 0f;
             Subtitles.Show(0, t);
 
             tObjCount = new SubtitleText(""); tObjCount.ScaleVector = new Vector2(0.8f, 1f);            
             tObjCount.StartTime = 0f;
-            tObjCount.Motion.Position = new Vector2(Screen.Width - 0.25f, 0.035f); 
+            tObjCount.Motion.Position = new Vector2(Screen.Width - 0.25f, 0.035f);
+            tObjCount.Visible = false;
             Subtitles.Show(-2, tObjCount);
         }
 
@@ -134,7 +135,7 @@ namespace Pixie1.Levels
             if (pixie.Score > 0)
             {
                 tObjCount.Text = "Tree-score: " + pixie.Score;
-                tObjCount.Motion.Position = new Vector2(Screen.Width-0.25f, 0.035f); 
+                tObjCount.Visible = true;
             }
             // scroll background
             if (SimTime >= SCROLLING_START_TIME)
