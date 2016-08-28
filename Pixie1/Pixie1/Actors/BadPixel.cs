@@ -103,7 +103,7 @@ namespace Pixie1.Actors
             */
 
             MyMotion = new LinearMotionBehavior(new Vector2(0f, 1f));
-            MyMotion.MoveSpeed = RandomMath.RandomBetween(1f, 10f);
+            MyMotion.MoveSpeed = RandomMath.RandomBetween(0.2f, 2f);
             Add(MyMotion);
         }
 

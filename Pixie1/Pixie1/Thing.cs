@@ -259,6 +259,8 @@ namespace Pixie1
             Vector2 vdif = Target - Position;
             if (vdif.LengthSquared() > 0f) // if target not reached yet
             {
+                Position = Target; // debug
+                /*
                 Vector2 vmove = vdif;
                 vmove.Normalize();
                 vmove *= TargetSpeed * Velocity;
@@ -274,6 +276,7 @@ namespace Pixie1
                     // apply move towards target
                     Position += vmove;
                 }
+                 */
             }
 
         }
