@@ -153,7 +153,7 @@ namespace Pixie1.Actors
                             if (bp.Parent is Pixie)
                             {
                                 pixie.AddNextUpdate(this); // become a child - attach to it.
-                                AttachmentPosition = new Vector2(PositionX - pixie.PositionX, PositionY - pixie.PositionY); // new relative position
+                                AttachmentPosition = new Vector2(TargetX - pixie.TargetX, TargetY - pixie.TargetY); // new relative position
                                 TTutil.Round(ref AttachmentPosition);
                                 pixie.Score += 1;
                                 break;
@@ -164,7 +164,7 @@ namespace Pixie1.Actors
                             pixie.AddNextUpdate(this); // become a child - attach to it.
                             //AttachmentPosition = (new Vector2(PositionX, PositionY) - pixie.Target); // new relative position
                             //AttachmentPosition = new Vector2(1f,PositionY-pixie.TargetY); // new relative position
-                            AttachmentPosition = new Vector2(PositionX - pixie.PositionX, PositionY - pixie.PositionY); // new relative position
+                            AttachmentPosition = new Vector2(TargetX - pixie.TargetX, TargetY - pixie.TargetY); // new relative position
                             TTutil.Round(ref AttachmentPosition);
                             //Level.Current.Subtitles.Show(2, "Ouch! That sticks!",3f);
                             pixie.Score += 1;
@@ -176,7 +176,7 @@ namespace Pixie1.Actors
         
             // check self-delete
             Vector2 pp = pixie.Target;
-            if (PositionY > pixie.PositionY + 130f)     // if way down player somewhere, delete
+            if (TargetY > pixie.TargetY + 130f)     // if way down player somewhere, delete
                 Delete = true;
             if (SimTime < 0.2f && CollidesWithBackground(Vector2.Zero))  // new entities that get stuck on background - delete
             {

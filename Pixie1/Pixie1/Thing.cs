@@ -263,7 +263,7 @@ namespace Pixie1
             Vector2 vdif = Target - Position;
             if (vdif.LengthSquared() > 0f) // if target not reached yet
             {
-                if (true)
+                if (false)
                     Position = Target; // debug
                 else
                 {
