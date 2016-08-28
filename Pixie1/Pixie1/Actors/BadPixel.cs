@@ -150,7 +150,7 @@ namespace Pixie1.Actors
                         if (t is BadPixel)
                         {
                             BadPixel bp = t as BadPixel;
-                            if (bp.Parent is Pixie && PositionY >= (pixie.PositionY-3))
+                            if (bp.Parent is Pixie)
                             {
                                 pixie.AddNextUpdate(this); // become a child - attach to it.
                                 AttachmentPosition = new Vector2(PositionX - pixie.PositionX, PositionY - pixie.PositionY); // new relative position
@@ -161,17 +161,14 @@ namespace Pixie1.Actors
                         }
                         else if (t is Pixie)
                         {
-                            if (PositionY >= (pixie.PositionY - 3))
-                            {
-                                pixie.AddNextUpdate(this); // become a child - attach to it.
-                                //AttachmentPosition = (new Vector2(PositionX, PositionY) - pixie.Target); // new relative position
-                                //AttachmentPosition = new Vector2(1f,PositionY-pixie.TargetY); // new relative position
-                                AttachmentPosition = new Vector2(PositionX - pixie.PositionX, PositionY - pixie.PositionY); // new relative position
-                                TTutil.Round(ref AttachmentPosition);
-                                //Level.Current.Subtitles.Show(2, "Ouch! That sticks!",3f);
-                                pixie.Score += 1;
-                                break;
-                            }
+                            pixie.AddNextUpdate(this); // become a child - attach to it.
+                            //AttachmentPosition = (new Vector2(PositionX, PositionY) - pixie.Target); // new relative position
+                            //AttachmentPosition = new Vector2(1f,PositionY-pixie.TargetY); // new relative position
+                            AttachmentPosition = new Vector2(PositionX - pixie.PositionX, PositionY - pixie.PositionY); // new relative position
+                            TTutil.Round(ref AttachmentPosition);
+                            //Level.Current.Subtitles.Show(2, "Ouch! That sticks!",3f);
+                            pixie.Score += 1;
+                            break;
                         }
                     }
                 }
