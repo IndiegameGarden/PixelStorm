@@ -18,7 +18,7 @@ namespace Pixie1.Actors
         {            
             IsCollisionFree = false;
             DrawInfo.DrawColor = new Color(251, 101, 159);
-            Velocity = 3f;
+            Velocity = 10f;
         }
 
         protected override void OnDraw(ref DrawParams p)
@@ -29,9 +29,9 @@ namespace Pixie1.Actors
         protected override void OnUpdate(ref UpdateParams p)
         {
             base.OnUpdate(ref p);
-            Velocity = 3f;
-            if (TargetMove.Y == 1f && TargetMove.X == 0f)
-                Velocity = 6f;
+            //Velocity = 3f;
+            //if (TargetMove.Y == 1f && TargetMove.X == 0f)
+            //    Velocity = 6f;
 
             /*
             // check all my children (attached blocks) if properly aligned, only when I'm not moving

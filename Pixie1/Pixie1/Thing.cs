@@ -259,24 +259,26 @@ namespace Pixie1
             Vector2 vdif = Target - Position;
             if (vdif.LengthSquared() > 0f) // if target not reached yet
             {
-                Position = Target; // debug
-                /*
-                Vector2 vmove = vdif;
-                vmove.Normalize();
-                vmove *= TargetSpeed * Velocity;
-                // convert speed vector to move vector (x = v * t)
-                vmove *= p.Dt;
-                // check if target reached already (i.e. move would overshoot target)
-                if (vmove.LengthSquared() >= vdif.LengthSquared())
-                {
-                    Position = Target;
-                }
+                if (true)
+                    Position = Target; // debug
                 else
                 {
-                    // apply move towards target
-                    Position += vmove;
+                    Vector2 vmove = vdif;
+                    vmove.Normalize();
+                    vmove *= TargetSpeed * Velocity;
+                    // convert speed vector to move vector (x = v * t)
+                    vmove *= p.Dt;
+                    // check if target reached already (i.e. move would overshoot target)
+                    if (vmove.LengthSquared() >= vdif.LengthSquared())
+                    {
+                        Position = Target;
+                    }
+                    else
+                    {
+                        // apply move towards target
+                        Position += vmove;
+                    }
                 }
-                 */
             }
 
         }

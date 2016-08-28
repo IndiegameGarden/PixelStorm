@@ -11,6 +11,7 @@ namespace Pixie1
     {
         float pressTime = 0f;
         bool isTriggerPressed = false;
+        float KEY_REP_VELOCITY = 3.0f;
 
         public PixieKeyControl()
             : base()
@@ -84,7 +85,7 @@ namespace Pixie1
             }
 
             // key rep
-            if (pressTime > 0.2f / ParentThing.Velocity ) 
+            if (pressTime > 0.2f / KEY_REP_VELOCITY ) 
                 pressTime = 0f;
 
             // make user's requested motion vector
