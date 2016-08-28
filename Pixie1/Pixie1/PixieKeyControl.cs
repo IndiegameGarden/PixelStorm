@@ -11,7 +11,7 @@ namespace Pixie1
     {
         float pressTime = 0f;
         bool isTriggerPressed = false;
-        float KEY_REP_VELOCITY = 3.0f;
+        float KEY_REP_VELOCITY = 2.0f;
 
         public PixieKeyControl()
             : base()

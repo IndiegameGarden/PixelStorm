@@ -21,7 +21,7 @@ namespace Pixie1.Levels
         public static float SCROLLING_START_TIME = 7.5f;
         public static Vector2 WINNING_POSITION = new Vector2(73f, 7f);
         public static Color LEVEL_FOREGROUND_COLOR = new Color(231, 231, 248);
-
+        public static Color LEVEL_BACKGROUND_COLOR = Color.DarkRed;
         public SubtitleText tObjCount;
         public Boolean hasLost = false;
 
@@ -49,6 +49,7 @@ namespace Pixie1.Levels
             // select bitmap bg            
             Background = new LevelBackground("tetrash.png");
             Background.ForegroundColor = LEVEL_FOREGROUND_COLOR;
+            Background.BackgroundColor = LEVEL_BACKGROUND_COLOR;
             Background.TargetSpeed = SCREEN_MOTION_SPEED;
             Add(Background);
             Background.Target = BG_STARTING_POS;

@@ -91,19 +91,8 @@ namespace Pixie1.Actors
         {
             IsCollisionFree = false;
 
-            /*
-            SubsumptionBehavior sub = new SubsumptionBehavior();
-            Add(sub);
-            */
-
-            /*
-            Wandering = new RandomWanderBehavior(2.7f, 11.3f);
-            Wandering.MoveSpeed = 0.7f;
-            sub.Add(Wandering);
-            */
-
             MyMotion = new LinearMotionBehavior(new Vector2(0f, 1f));
-            MyMotion.MoveSpeed = RandomMath.RandomBetween(0.2f, 2f);
+            MyMotion.MoveSpeed = RandomMath.RandomBetween(0.2f, 1.6f);
             Add(MyMotion);
         }
 
