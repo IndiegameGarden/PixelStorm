@@ -65,8 +65,8 @@ namespace Pixie1.Levels
         protected override void InitToys()
         {
             base.InitToys();
-            Vector2 p;
-            Toy t;
+            //Vector2 p;
+            //Toy t;
             //t = new ZoomOutToy(); p = PIXIE_STARTING_POS + new Vector2(1f,-12f); t.PositionAndTarget = p; Add(t);
         }
 

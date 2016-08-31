@@ -1,4 +1,6 @@
 using System;
+using TTengine.Util;
+using Microsoft.Xna.Framework.Input;
 
 namespace Pixie1
 {
@@ -10,10 +12,19 @@ namespace Pixie1
         /// </summary>
         static void Main(string[] args)
         {
-            using (PixieGame game = new PixieGame())
+            try
             {
-                game.Run();
+                using (PixieGame game = new PixieGame())
+                {
+                    game.Run();
+                }
             }
+            catch (Exception ex)
+            {
+                MsgBox.Show("FEIG! (Fatal Error In Game)",
+                  "Fatal Error - if you want you can notify the author. Or whatever.\n" + ex.Message + "\n" + ex.ToString());
+            }
+
         }
     }
 #endif
